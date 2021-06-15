@@ -23,12 +23,26 @@
             axios.post('/api/student', {name: nameInput.value})
             .then(res => {
                 conrtainer.innerHTML = ''
+                nameInput.value = ''
 
                 res.data.forEach((studenName) => {
                     container.innerHTML += `<p>${studenName}</p>`
                 })
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                nameInput.value = ''
+
+                const notif = document.createElement('aside')
+                notif.innerHTML = `<P>${err.response.data}</P>
+                <button class ="close">close</button>`
+                document.body.appendChild(notif)
+
+                document.querySelector('.close').forEach/btn => {
+                    btn.addEventListener('click', (e) => {
+                        
+                    })
+                }
+            })
         }
 
         addForm.addEventListener('submit', submitHandler)
