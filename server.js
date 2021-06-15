@@ -21,8 +21,11 @@ app.post('/api/student', (req, res) => {
     name = name.trim()
     students.push(name)
     rollbar.log('student added successfully', {author: 'jared', type: 'manual'})
+    res.status(200).send(students)
 })
 
 const port = process.env.PORT || 4545
+
+app.use(rollbar.errorHandler())
 
 app.listen(port, () => console.log(`running on port: ${port}`))
